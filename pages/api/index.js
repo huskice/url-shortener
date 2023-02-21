@@ -10,7 +10,7 @@ export default async function handler(req, res) {
   } else {
     const { error, value } = apiUrlSchema.validate(req.body)
 
-    const { shortUrl, code } = generateUrl()
+    const { code } = generateUrl()
 
     try {
       if (error) {
@@ -19,7 +19,6 @@ export default async function handler(req, res) {
         const newUrl = await prisma.url.create({
           data: {
             originalUrl: value.originalUrl,
-            shortUrl: shortUrl,
             code: code,
           },
         })
